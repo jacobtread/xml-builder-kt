@@ -1,6 +1,9 @@
 # Kotlin XML Builder
 
 ![Latest Version](https://img.shields.io/maven-central/v/com.jacobtread.xml/xml-builder-kt?label=LATEST%20VERSION&style=for-the-badge)
+![License](https://img.shields.io/github/license/jacobtread/xml-builder-kt?style=for-the-badge)
+[![Gradle Build](https://img.shields.io/github/workflow/status/jacobtread/xml-builder-kt/gradle-build?style=for-the-badge)](https://github.com/jacobtread/xml-builder-kt/actions/workflows/gradle.yml)
+![Total Lines](https://img.shields.io/tokei/lines/github/jacobtread/xml-builder-kt?style=for-the-badge)
 
 This library is a Kotlin library for composing XML documents using a kotlin DSL.
 
