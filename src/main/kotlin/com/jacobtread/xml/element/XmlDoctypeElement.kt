@@ -2,7 +2,7 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
-class DoctypeElement(
+class XmlDoctypeElement(
     private val name: String,
     private val systemId: String? = null,
     private val publicId: String? = null,
@@ -25,5 +25,23 @@ class DoctypeElement(
                 .append('"')
         }
         builder.appendLine(">")
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is XmlDoctypeElement) return false
+
+        if (name != other.name) return false
+        if (systemId != other.systemId) return false
+        if (publicId != other.publicId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + (systemId?.hashCode() ?: 0)
+        result = 31 * result + (publicId?.hashCode() ?: 0)
+        return result
     }
 }

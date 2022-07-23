@@ -1,7 +1,5 @@
 package com.jacobtread.xml
 
-import com.jacobtread.xml.element.XmlEscapeAppender
-
 enum class XmlVersion(val versionNumber: String) : XmlEscapeAppender {
     V10("1.0") {
         override fun appendEscapedValue(builder: Appendable, value: String) {

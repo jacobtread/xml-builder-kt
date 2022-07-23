@@ -9,6 +9,4 @@ import com.jacobtread.xml.OutputOptions
 interface XmlElement {
 
     fun render(builder: Appendable, indent: String, outputOptions: OutputOptions)
-
-    fun isEmpty(): Boolean
 }

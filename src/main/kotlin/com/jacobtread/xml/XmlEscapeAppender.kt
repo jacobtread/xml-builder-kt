@@ -1,4 +1,4 @@
-package com.jacobtread.xml.element
+package com.jacobtread.xml
 
 interface XmlEscapeAppender {
 

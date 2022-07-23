@@ -2,21 +2,17 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
-open class XmlTextElement internal constructor(private val text: String) : XmlElement, XmlIgnorable {
+class XmlCDATAElement internal constructor(val text: String) : XmlElement, XmlIgnorable {
 
     override fun render(builder: Appendable, indent: String, outputOptions: OutputOptions) {
-        if (isTextEmpty()) return
         builder.append(indent)
-        appendText(builder, outputOptions)
-        builder.append(outputOptions.lineEnding)
-    }
-
-    open fun appendText(builder: Appendable, outputOptions: OutputOptions) {
-        outputOptions.appendEscapedText(builder, text)
-    }
-
-    private fun isTextEmpty(): Boolean {
-        return text.trim('\n', '\r').isBlank()
+            .append("<![CDATA[")
+        val cdataEnd = "]]>"
+        val cdataStart = "<![CDATA["
+        val escapedText = text.replace(cdataEnd, "]]$cdataEnd$cdataStart>")
+        builder.append(escapedText)
+        builder.append("]]>")
+            .append(outputOptions.lineEnding)
     }
 
     override fun isIgnorable(): Boolean {
@@ -25,7 +21,7 @@ open class XmlTextElement internal constructor(private val text: String) : XmlEl
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is XmlTextElement) return false
+        if (other !is XmlCDATAElement) return false
         if (text != other.text) return false
         return true
     }
