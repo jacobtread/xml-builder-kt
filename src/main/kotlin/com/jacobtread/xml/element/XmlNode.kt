@@ -136,9 +136,9 @@ open class XmlNode internal constructor(val nodeName: String) : XmlElement {
         builder.append(indent)
             .append('<')
             .append(nodeName)
-            .append(' ')
         // Append tag attributes
         if (attributes.isNotEmpty()) {
+            builder.append(' ')
             val entries = attributes.iterator()
             if (entries.hasNext()) {
                 while (true) {
