@@ -62,6 +62,17 @@ class XmlRootNode(nodeName: String) : XmlNode(nodeName) {
         super.render(builder, indent, outputOptions)
     }
 
+    override fun toString(): String {
+        return toString(OutputOptions())
+    }
+
+    fun toString(outputOptions: OutputOptions): String {
+        val builder = StringBuilder()
+        render(builder, "", outputOptions)
+        return builder.toString().trim()
+    }
+
+
     fun doctype(
         name: String? = null,
         publicId: String? = null,
