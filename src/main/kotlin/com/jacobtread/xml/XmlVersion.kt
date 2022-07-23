@@ -1,6 +1,6 @@
 package com.jacobtread.xml
 
-enum class XmlVersion(val versionNumber: String) : XmlEscapeAppender {
+enum class XmlVersion(val versionNumber: String) {
     V10("1.0") {
         override fun appendEscapedValue(builder: Appendable, value: String) {
             value.forEach {
@@ -46,5 +46,8 @@ enum class XmlVersion(val versionNumber: String) : XmlEscapeAppender {
                 }
             }
         }
-    }
+    };
+
+    abstract fun appendEscapedValue(builder: Appendable, value: String)
+
 }

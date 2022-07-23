@@ -5,7 +5,7 @@ import com.jacobtread.xml.XmlVersion
 
 class XmlRootNode(nodeName: String) : XmlNode(nodeName) {
 
-    private var includeXmlProlog = false
+    var includeXmlProlog = false
 
     var docType: XmlDoctypeElement? = null
 
