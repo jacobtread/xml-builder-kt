@@ -1,10 +1,40 @@
 # Kotlin XML Builder
 
-This library is a Kotlin library for composing XML documents using a kotlin DSL. 
+![Latest Version](https://img.shields.io/maven-central/v/com.jacobtread.xml/xml-builder-kt?label=LATEST%20VERSION&style=for-the-badge)
+
+This library is a Kotlin library for composing XML documents using a kotlin DSL.
 
 > Note: The published releases of this library are compiled for Java 11 Bytecode if you need to use
-> a lower version of Java you will need to modify `javaCompileVersion` in `gradle.properties` 
+> a lower version of Java you will need to modify `javaCompileVersion` in `gradle.properties`
 > and change it to your desired version
+
+### Using this dependency
+
+Maven
+
+```xml
+<dependency>
+    <groupId>com.jacobtread.xml</groupId>
+    <artifactId>xml-builder-kt</artifactId>
+    <version>{VERSION}</version>
+</dependency>
+```
+
+Groovy
+
+```groovy
+dependencies {
+    implementation 'com.jacobtread.xml:xml-builder-kt:{VERSION}'
+}
+```
+
+Kotlin DSL
+
+```kotlin
+dependencies {
+    implementation("com.jacobtread.xml:xml-builder-kt:{VERSION}")
+}
+```
 
 ### Operator Overloads
 
@@ -19,6 +49,7 @@ This library is a Kotlin library for composing XML documents using a kotlin DSL.
 > you can manually enable prolog generation by setting `includeXmlProlog` to `true`
 
 ### Basic XML Example
+
 The following code block produces a simple XML structure with a comment
 
 ```kotlin
@@ -41,6 +72,7 @@ println(stringResult)
 This code produces the following output
 
 ```xml
+
 <Test>
     <InnerElement>
         <!-- This is a commented out line -->
@@ -94,7 +126,7 @@ This code produces the following output
 
 ### XML Attributes
 
-There is 3 different ways of setting attributes on XmlNodes, and they are the 
+There is 3 different ways of setting attributes on XmlNodes, and they are the
 following
 
 ```kotlin
@@ -116,5 +148,6 @@ println(stringResult)
 This code produces the following output
 
 ```xml
+
 <Test test="value" test1="value1" test2="value2"/>
 ```
