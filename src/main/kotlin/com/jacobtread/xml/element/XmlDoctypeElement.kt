@@ -2,6 +2,14 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
+/**
+ * Element representing the DOCTYPE for the root XML element
+ *
+ * @property name The DOCTYPE name
+ * @property systemId The system id
+ * @property publicId The public id
+ * @constructor Creates a new DOCTYPE element
+ */
 class XmlDoctypeElement(
     private val name: String,
     private val systemId: String? = null,

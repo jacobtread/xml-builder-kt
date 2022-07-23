@@ -2,6 +2,13 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
+/**
+ * Represents a comment within the XML tree. This element is intended to be
+ * created via the builder function inside Node [XmlNode.comment]
+ *
+ * @property text
+ * @constructor Create empty Xml comment element
+ */
 class XmlCommentElement internal constructor(val text: String) : XmlElement, XmlIgnorable {
     override fun render(builder: Appendable, indent: String, outputOptions: OutputOptions) {
         val escapedText = text.replace("--", "&#45;&#45;\"")

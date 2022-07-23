@@ -2,6 +2,14 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
+/**
+ * Represents an XML Processing Instruction element. This is indented to be created
+ * through the builder method [XmlNode.processingInstruction] or [XmlRootNode.globalProcessingInstructions]
+ *
+ * @property text The text value for this processing instruction
+ * @property attributes The attributes for this instruction
+ * @constructor Creates a new Processing instruction element
+ */
 class XmlPIElement internal constructor(val text: String, val attributes: Map<String, String>) : XmlElement, XmlIgnorable {
     override fun render(builder: Appendable, indent: String, outputOptions: OutputOptions) {
         builder.append(indent)
@@ -27,7 +35,6 @@ class XmlPIElement internal constructor(val text: String, val attributes: Map<St
         builder.append("?>")
         builder.append(outputOptions.lineEnding)
     }
-
 
     override fun isIgnorable(): Boolean {
         return text.isEmpty()

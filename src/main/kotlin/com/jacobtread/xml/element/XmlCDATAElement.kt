@@ -2,6 +2,12 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
+/**
+ * Represents a CDATA element within the XML tree
+ *
+ * @property text The CDATA text value
+ * @constructor Create a new CDATA Element
+ */
 class XmlCDATAElement internal constructor(val text: String) : XmlElement, XmlIgnorable {
 
     override fun render(builder: Appendable, indent: String, outputOptions: OutputOptions) {
