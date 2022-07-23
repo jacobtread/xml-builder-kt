@@ -1,11 +1,15 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm")
     `maven-publish`
     signing
 }
 
+val projectVersion: String by project
+
 group = "com.jacobtread.xml"
-version = "1.0-SNAPSHOT"
+version = projectVersion
 
 repositories {
     mavenCentral()
@@ -22,6 +26,14 @@ tasks.test {
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+tasks.withType(KotlinCompile::class) {
+    kotlinOptions {
+        val javaCompileVersion: String by project
+        jvmTarget = javaCompileVersion
+        freeCompilerArgs = freeCompilerArgs + "-Xjvm-default=all"
+    }
 }
 
 publishing {
