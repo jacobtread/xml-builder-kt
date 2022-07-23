@@ -12,7 +12,7 @@ open class XmlTextElement internal constructor(private val text: String) : XmlEl
     }
 
     open fun appendText(builder: Appendable, outputOptions: OutputOptions) {
-        outputOptions.appendEscapedText(builder, text)
+        outputOptions.appendEscapedValue(builder, text)
     }
 
     private fun isTextEmpty(): Boolean {
