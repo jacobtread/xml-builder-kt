@@ -8,6 +8,7 @@ class XmlPIElement internal constructor(val text: String, val attributes: Map<St
             .append("<?")
             .append(text)
         if (attributes.isNotEmpty()) {
+            builder.append(' ')
             val entries = attributes.iterator()
             if (entries.hasNext()) {
                 while (true) {
@@ -23,6 +24,7 @@ class XmlPIElement internal constructor(val text: String, val attributes: Map<St
                 }
             }
         }
+        builder.append("?>")
         builder.append(outputOptions.lineEnding)
     }
 
