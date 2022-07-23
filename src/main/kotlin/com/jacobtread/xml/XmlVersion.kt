@@ -1,5 +1,12 @@
 package com.jacobtread.xml
 
+/**
+ * Xml version enum contains different version of
+ * xml along with their escape implementation
+ *
+ * @property versionNumber The version number string
+ * @constructor Creates a new XML version with the provided version number
+ */
 enum class XmlVersion(val versionNumber: String) {
     V10("1.0") {
         override fun appendEscapedValue(builder: Appendable, value: String) {
@@ -48,6 +55,12 @@ enum class XmlVersion(val versionNumber: String) {
         }
     };
 
+    /**
+     * Escapes the provided value; appending the escaped value
+     * to the provided [builder]
+     *
+     * @param builder The builder to append the value to
+     * @param value The value to escape
+     */
     abstract fun appendEscapedValue(builder: Appendable, value: String)
-
 }
