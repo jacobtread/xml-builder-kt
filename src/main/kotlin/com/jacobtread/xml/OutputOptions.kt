@@ -2,7 +2,7 @@ package com.jacobtread.xml
 
 data class OutputOptions(
     val prettyPrint: Boolean = true,
-    val singleLineTextElements: Boolean = false,
+    val singleLineTextElements: Boolean = true,
     val useSelfClosingTags: Boolean = true,
     val useCharacterReferences: Boolean = false,
     val indent: String = "\t",
