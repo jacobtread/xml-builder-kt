@@ -362,7 +362,7 @@ open class XmlNode internal constructor(val nodeName: String) : XmlElement {
             ) { // Single line text element formatting
                 val textElement = children[0] as XmlTextElement
                 builder.append('>')
-                textElement.appendText(builder, outputOptions)
+                outputOptions.appendEscapedValue(builder, textElement.text)
                 builder.append("</")
                     .append(nodeName)
                     .append('>')
