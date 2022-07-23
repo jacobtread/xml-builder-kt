@@ -1,4 +1,5 @@
 import com.jacobtread.xml.XmlVersion
+import com.jacobtread.xml.element.XmlTextElement
 import com.jacobtread.xml.xml
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,7 +34,7 @@ internal class MatchTests {
                 text("Another String Line")
                 text("And Another line")
             }
-            node("SingleTest", "This is some content")
+            textNode("SingleTest", "This is some content")
         }
 
         val actualResult = result.toString()
@@ -69,6 +70,34 @@ internal class MatchTests {
     }
 
     @Test
+    fun `test global processing instruction`() {
+        val expectedResult = """
+            <?test?>
+            <?test1 a="b"?>
+            <?test2 c="d"?>
+            <Test>
+            	<InnerElement>
+            		<![CDATA[This is CDATA]]>
+            		Text String Line
+            	</InnerElement>
+            </Test>
+        """.trimIndent()
+
+        val result = xml("Test") {
+            globalProcessingInstruction("test")
+            globalProcessingInstruction("test1", "a" to "b")
+            globalProcessingInstruction("test2", mapOf("c" to "d"))
+            node("InnerElement") {
+                cdata("This is CDATA")
+                text("Text String Line")
+            }
+        }
+
+        val actualResult = result.toString()
+        assertOutputEqual(expectedResult, actualResult)
+    }
+
+    @Test
     fun `test xmlns`() {
         val expectedResult = """
             <Test xmlns="value"/>
@@ -77,6 +106,20 @@ internal class MatchTests {
             xmlns = "value"
         }
         val actualResult = result.toString()
+        assertOutputEqual(expectedResult, actualResult)
+    }
+
+    @Test
+    fun `test append to builder`() {
+        val expectedResult = """
+            <Test xmlns="value"/>
+        """.trimIndent()
+        val result = xml("Test") {
+            xmlns = "value"
+        }
+        val builder = StringBuilder()
+        result.appendToBuilder(builder)
+        val actualResult = builder.toString()
         assertOutputEqual(expectedResult, actualResult)
     }
 
@@ -109,6 +152,7 @@ internal class MatchTests {
             assertTrue(hasAttribute("test2"))
         }
     }
+
     @Test
     fun `check has matches`() {
         xml("Test") {
@@ -156,6 +200,20 @@ internal class MatchTests {
     }
 
     @Test
+    fun `test add element`() {
+        val expectedResult = """
+            <Test>Text String Line</Test>
+        """.trimIndent()
+
+        val result = xml("Test") {
+            addElement(XmlTextElement("Text String Line"))
+        }
+
+        val actualResult = result.toString()
+        assertOutputEqual(expectedResult, actualResult)
+    }
+
+    @Test
     fun `test non string node operator overload`() {
         val expectedResult = """
             <Test>
@@ -172,6 +230,21 @@ internal class MatchTests {
     }
 
     @Test
+    fun `test doctype`() {
+        val expectedResult = """
+            <!DOCTYPE test PUBLIC "test" "test">
+            <Test/>
+        """.trimIndent()
+
+        val result = xml("Test") {
+            doctype("test", "test", "test")
+        }
+
+        val actualResult = result.toString()
+        assertOutputEqual(expectedResult, actualResult)
+    }
+
+    @Test
     fun `test non string node`() {
         val expectedResult = """
             <Test>
@@ -180,7 +253,7 @@ internal class MatchTests {
         """.trimIndent()
 
         val result = xml("Test") {
-            node("SingleTest", 3)
+            textNode("SingleTest", 3)
         }
 
         val actualResult = result.toString()
