@@ -2,25 +2,74 @@ package com.jacobtread.xml.element
 
 import com.jacobtread.xml.OutputOptions
 
+/**
+ * Object representing a named node in the xml tree
+ *
+ * @property nodeName The name of this node
+ * @constructor Creates a new XmlNode with the provided name
+ */
 open class XmlNode internal constructor(val nodeName: String) : XmlElement {
 
+    /**
+     * Map of the attributes for this node. Attribute values are allowed
+     * to be any type as they are encoded to string later.
+     */
     val attributes = LinkedHashMap<String, Any?>()
+
+    /**
+     * List of all elements that are children to this node. These
+     * elements will be rendered inside this node.
+     */
     val children = ArrayList<XmlElement>()
 
     // region Children Functions
 
+    /**
+     * Creates a new text element from the provided text
+     * value and adds it to the children list. The text
+     * value will be placed directly inside the node
+     *
+     * @param text The text value
+     */
     fun text(text: String) {
         children.add(XmlTextElement(text))
     }
 
+    /**
+     * Creates a new comment element from the provided
+     * text value and adds it to the children list
+     *
+     * The rendered result of this element will resemble the following:
+     *
+     * <!-- The provided text -->
+     *
+     * @param text The comment text value
+     */
     fun comment(text: String) {
         children.add(XmlCommentElement(text))
     }
 
+    /**
+     * Creates a new CDATA element from the provided text
+     * value and adds it to the children list
+     *
+     * The rendered result of this element will resemble the following:
+     *
+     * <![CDATA[The provided text]]>
+     *
+     * @param text The provided CDATA text value
+     */
     fun cdata(text: String) {
         children.add(XmlCDATAElement(text))
     }
 
+    /**
+     * Creates a new Processing Instruction element from the provided
+     * text and attributes then adds it to the children list
+     *
+     * @param text The provided processing instruction text
+     * @param attributes The attributes for the
+     */
     fun processingInstruction(text: String, vararg attributes: Pair<String, String>) {
         children.add(XmlPIElement(text, linkedMapOf(*attributes)))
     }
